@@ -1,0 +1,11 @@
+.container {
+  height: 80vh;
+  background-color: greenyellow;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+}
+
+.container .grid {
+  background-color: plum;
+}
