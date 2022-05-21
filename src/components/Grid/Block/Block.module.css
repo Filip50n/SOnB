@@ -1,7 +1,9 @@
 .dark {
   background-color: darkolivegreen;
+  transition-duration: 500ms;
 }
 
 .light {
   background-color: lightgoldenrodyellow;
+  transition-duration: 500ms;
 }

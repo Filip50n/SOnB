@@ -1,11 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./Block.module.css";
 
 const Block = (props) => {
-  const className = (props.x + props.y) % 7 === 0 ? styles.dark : styles.light;
+  const [clicked, setClicked] = useState(false);
+  const [className, setClassName] = useState(styles.light)
+
+  const click = ()=>{
+    if(clicked == false){
+      setClicked(true)
+      setClassName(styles.dark)
+    }else{
+      setClicked(false)
+      setClassName(styles.light)
+    }
+    
+  }
 
   return (
-    <div className={className}>
+    <div onClick={()=>{click()}} className={className}>
       ({props.x}, {props.y})
     </div>
   );
