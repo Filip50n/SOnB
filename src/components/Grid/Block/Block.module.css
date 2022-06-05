@@ -1,7 +1,17 @@
 .false {
   background-color: red;
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .true {
   background-color: green;
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }

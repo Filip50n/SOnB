@@ -22,14 +22,14 @@ code {
   padding-top: 6vh;
   display: flex;
   flex-direction: column;
-  width: 20vw;
+  width: 40vw;
   align-items: center;
   justify-content: center;
   margin: auto;
 }
 
 .form-button {
-  margin-top: 1vh;
+  margin: 1vh;
 }
 
 .grid-container {
@@ -38,12 +38,4 @@ code {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   grid-template-rows: repeat(10, 1fr);
-}
-
-.false {
-  background-color: red;
-}
-
-.true {
-  background-color: green;
 }

@@ -6,77 +6,37 @@ function App() {
   const [firstValue, setFirstValue] = useState("");
   const [secondValue, setSecondValue] = useState("");
   const [showResult, setShowResult] = useState(false);
-  const [errorInjected, setErrorInjected] = useState(false);
+
+  const [errorOne, setErrorOne] = useState(false);
+  const [errorTwo, setErrorTwo] = useState(false);
+  const [errorThree, setErrorThree] = useState(false);
+
   const [firstResult, setFirstResult] = useState(true);
   const [secondResult, setSecondResult] = useState(true);
   const [thirdResult, setThirdResult] = useState(true);
   const [finalResult, setFinalResult] = useState(true);
 
-  // useEffect(() => {
-  //   console.log(
-  //     "Use effect has been called, new values: ",
-  //     firstValue,
-  //     secondValue
-  //   );
-  //   parseResult();
-  // }, [firstValue, secondValue]);
+  useEffect(() => {
+    const firstR = errorOne
+      ? !(firstValue === secondValue)
+      : firstValue === secondValue;
+    const secondR = errorTwo
+      ? !(firstValue === secondValue)
+      : firstValue === secondValue;
+    const thirdR = errorThree
+      ? !(firstValue === secondValue)
+      : firstValue === secondValue;
 
-  const parseResult = () => {
-    console.log(
-      "Parse result has been called by use effect, new values: ",
-      firstValue,
-      secondValue,
-      "Expected results: ",
-      firstValue === secondValue,
-      errorInjected ? firstValue != secondValue : firstValue === secondValue,
-      errorInjected ? firstValue != secondValue : firstValue === secondValue,
-      "Actual results BEFORE: ",
-      firstResult,
-      secondResult,
-      thirdResult
-    );
+    const truths = [firstR, secondR, thirdR].filter((x) => x).length;
+    const falses = [firstR, secondR, thirdR].filter((x) => !x).length;
 
-    setFirstResult(firstValue === secondValue);
-    setSecondResult(
-      errorInjected
-        ? firstValue != secondValue // comparing with two equal signs with error
-        : firstValue === secondValue
-    );
-    setThirdResult(
-      errorInjected
-        ? firstValue != secondValue // comparing with two equal signs with error
-        : firstValue === secondValue
-    );
+    const finalR = truths > falses;
 
-    const truths = [firstResult, secondResult, thirdResult].filter(
-      (x) => x
-    ).length;
-    const falses = [firstResult, secondResult, thirdResult].filter(
-      (x) => !x
-    ).length;
-
-    setFinalResult(truths > falses);
-    console.log(
-      "Actual results AFTER: ",
-      firstResult,
-      secondResult,
-      thirdResult,
-      "And final: ",
-      finalResult
-    );
-  };
-
-  const compareValues = (e) => {
-    e.preventDefault();
-    parseResult();
-    // setShowResult(true);
-    // console.log("i work!");
-  };
-
-  const reverseErrorInjection = (e) => {
-    e.preventDefault();
-    setErrorInjected(!errorInjected);
-  };
+    setFirstResult(firstR);
+    setSecondResult(secondR);
+    setThirdResult(thirdR);
+    setFinalResult(finalR);
+  }, [firstValue, secondValue, errorOne, errorTwo, errorThree]);
 
   const setFirst = (e) => {
     e.preventDefault();
@@ -89,25 +49,9 @@ function App() {
     setShowResult(false);
   };
 
-  const parseAndPrint = () => {
-    const firstResult = firstValue === secondValue;
-    const secondResult = errorInjected
-      ? firstValue != secondValue // comparing with two equal signs with error
-      : firstValue === secondValue;
-    const thirdResult = errorInjected
-      ? firstValue != secondValue // comparing with two equal signs with error
-      : firstValue === secondValue;
-
-    const truths = [firstResult, secondResult, thirdResult].filter(
-      (x) => x
-    ).length;
-    const falses = [firstResult, secondResult, thirdResult].filter(
-      (x) => !x
-    ).length;
-
-    const finalResult = truths > falses;
-
-    return `Wynik: ${finalResult}`;
+  const changeError = (e, setError, error) => {
+    e.preventDefault();
+    setError(error);
   };
 
   return (
@@ -129,15 +73,26 @@ function App() {
             onChange={(e) => setSecond(e)}
           />
           <div className="form-buttons">
-            <button onClick={compareValues} className="form-button">
-              Porównaj
+            <button
+              onClick={(e) => changeError(e, setErrorOne, !errorOne)}
+              className="form-button"
+            >
+              {errorOne ? "Usuń błąd #1" : "Wstrzyknij błąd #1"}
             </button>
-            <button onClick={reverseErrorInjection} className="form-button">
-              {errorInjected ? "Usuń błąd" : "Wstrzyknij błąd"}
+            <button
+              onClick={(e) => changeError(e, setErrorTwo, !errorTwo)}
+              className="form-button"
+            >
+              {errorTwo ? "Usuń błąd #2" : "Wstrzyknij błąd #2"}
+            </button>
+            <button
+              onClick={(e) => changeError(e, setErrorThree, !errorThree)}
+              className="form-button"
+            >
+              {errorThree ? "Usuń błąd #3" : "Wstrzyknij błąd #3"}
             </button>
           </div>
         </form>
-        {/* {showResult && <div>{parseAndPrint()}</div>} */}
       </div>
 
       {/* grid */}
@@ -153,25 +108,6 @@ function App() {
           />
         ))}
       </div>
-
-      {/* <Form
-        firstValue={firstValue}
-        setFirstValue={setFirstValue}
-        secondValue={secondValue}
-        setSecondValue={setSecondValue}
-        showResult={showResult}
-        setShowResult={setShowResult}
-        errorInjected={errorInjected}
-        setErrorInjected={setErrorInjected}
-      /> */}
-      {/* <Grid
-        firstValue={firstValue}
-        setFirstValue={setFirstValue}
-        secondValue={secondValue}
-        setSecondValue={setSecondValue}
-        errorInjected={errorInjected}
-        setRefresh={setRefresh}
-      /> */}
     </div>
   );
 }

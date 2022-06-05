@@ -9,30 +9,35 @@ const Block = ({
   thirdResult,
   finalResult,
 }) => {
+  useEffect(() => {
+    parse();
+  }, [firstResult, secondResult, thirdResult, firstResult]);
+
   const parse = () => {
-    if (x == 2 && y == 1) {
+    if (x == 2 && y == 3) {
       return (
         <div className={firstResult ? styles.true : styles.false}>first</div>
       );
-    } else if (x == 4 && y == 1) {
+    } else if (x == 4 && y == 3) {
       return (
         <div className={secondResult ? styles.true : styles.false}>second</div>
       );
-    } else if (x == 6 && y == 1) {
+    } else if (x == 6 && y == 3) {
       return (
-        <div className={thirdResult ? styles.true : styles.false}>third</div>
+        <div className={thirdResult ? styles.true : styles.false}>
+          <p>third</p>
+        </div>
       );
-    } else if (x == 4 && y == 3) {
+    } else if (x == 4 && y == 6) {
       return (
         <div className={finalResult ? styles.true : styles.false}>final</div>
       );
     } else {
-      return "";
-      // return `(${x}, ${y})`;
+      return <div></div>;
     }
   };
 
-  return <div>{() => parse()}</div>;
+  return parse();
 };
 
 export default Block;
