@@ -1,6 +1,6 @@
 .container {
-  height: 80vh;
-  background-color: greenyellow;
+  height: 70vh;
+  background-color: rgb(239, 250, 224);
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   grid-template-rows: repeat(10, 1fr);

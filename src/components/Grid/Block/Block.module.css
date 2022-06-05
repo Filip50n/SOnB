@@ -1,7 +1,7 @@
-.dark {
-  background-color: darkolivegreen;
+.false {
+  background-color: red;
 }
 
-.light {
-  background-color: lightgoldenrodyellow;
+.true {
+  background-color: green;
 }
